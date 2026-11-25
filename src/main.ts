@@ -1,4 +1,3 @@
-
 import './style.css'
 
 interface Task {
@@ -44,7 +43,7 @@ let tasks: Task[] = loadTasks()
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <header class="app-header">
-    <h1>TaskMate</h1>
+    <h1>Daftar Tugas Kuliah</h1>
     <p>Kelola tugas kuliahmu dengan lebih mudah ♡</p>
   </header>
 
@@ -55,8 +54,8 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
   <main class="main-container">
     <section class="welcome-section" id="beranda">
-      <h2>Halo, Mahasiswa! ♡</h2>
-      <p>Selamat datang di TaskMate. Yuk, atur tugas kuliahmu agar lebih terorganisir.</p>
+     <h2>Halo, Uziek! ♡</h2>
+     <p>Selamat datang di Daftar Tugas Kuliah. Yuk, atur tugas kuliahmu agar lebih terorganisir.</p>
     </section>
 
     <section class="task-section" id="tugas">
@@ -77,7 +76,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   </main>
 
   <footer class="app-footer">
-    <p>TaskMate © 2026 | Stay organized, stay productive ♡</p>
+    <p>Daftar Tugas Kuliah © 2026 | Stay organized, stay productive ♡</p>
   </footer>
 `
 
