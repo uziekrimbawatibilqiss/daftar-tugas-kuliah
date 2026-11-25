@@ -7,6 +7,7 @@ interface Task {
   deadline: string
   completed: boolean
 }
+type TaskStatus = 'Belum Selesai' | 'Selesai'
 
 const initialTasks: Task[] = [
   {
@@ -104,6 +105,10 @@ function escapeHTML(text: string): string {
   })
 }
 
+function getTaskStatus(completed: boolean): TaskStatus {
+  return completed ? 'Selesai' : 'Belum Selesai'
+}
+
 function renderTasks(): void {
   if (tasks.length === 0) {
     taskList.innerHTML = '<p class="empty-message">Belum ada tugas. Yuk, tambahkan tugas pertamamu!</p>'
@@ -116,7 +121,7 @@ function renderTasks(): void {
         <h3>${escapeHTML(task.title)}</h3>
         <p>${escapeHTML(task.course)}</p>
         <p>Deadline: ${escapeHTML(task.deadline)}</p>
-        <p>Status: ${task.completed ? 'Selesai' : 'Belum Selesai'}</p>
+        <p>Status: ${getTaskStatus(task.completed)}</p>
       </div>
 
       <div class="task-actions">
