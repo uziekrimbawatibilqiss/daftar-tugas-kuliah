@@ -1,4 +1,3 @@
-
 import './style.css'
 
 interface Task {
@@ -44,7 +43,7 @@ let tasks: Task[] = loadTasks()
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <header class="app-header">
-    <h1>TaskMate</h1>
+  <h1>TaskMate ♡</h1>
     <p>Kelola tugas kuliahmu dengan lebih mudah ♡</p>
   </header>
 
