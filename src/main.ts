@@ -1,4 +1,6 @@
 import './style.css'
+const appName = import.meta.env.VITE_APP_NAME
+const appVersion = import.meta.env.VITE_APP_VERSION
 
 interface Task {
   id: number
@@ -85,8 +87,8 @@ getElement<HTMLDivElement>('#app').innerHTML = `
   </main>
 
   <footer class="app-footer">
-    <p>TaskMate © 2026 | Stay organized, stay productive ♡</p>
-  </footer>
+  <p>${appName} © 2026 | Version ${appVersion} | Stay organized, stay productive ♡</p>
+</footer>
 `
 
 const form = getElement<HTMLFormElement>('#task-form')
