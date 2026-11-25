@@ -54,7 +54,7 @@ function getElement<T extends HTMLElement>(selector: string): T {
 }
 getElement<HTMLDivElement>('#app').innerHTML = `
   <header class="app-header">
-  <h1>TaskMate ♡</h1>
+  <h1>Daftar Tugas Kuliah</h1>
     <p>Kelola tugas kuliahmu dengan lebih mudah ♡</p>
   </header>
 
@@ -65,8 +65,8 @@ getElement<HTMLDivElement>('#app').innerHTML = `
 
   <main class="main-container">
     <section class="welcome-section" id="beranda">
-      <h2>Halo, Mahasiswa! ♡</h2>
-      <p>Selamat datang di TaskMate. Yuk, atur tugas kuliahmu agar lebih terorganisir.</p>
+      <h2>Halo, Uziek! ♡</h2>
+      <p>Selamat datang di Daftar Tugas Kuliah. Yuk, atur tugas kuliahmu agar lebih terorganisir.</p>
     </section>
 
     <section class="task-section" id="tugas">
