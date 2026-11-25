@@ -41,8 +41,16 @@ function loadTasks(): Task[] {
 }
 
 let tasks: Task[] = loadTasks()
+function getElement<T extends HTMLElement>(selector: string): T {
+  const element = document.querySelector<T>(selector)
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+  if (!element) {
+    throw new Error(`Element ${selector} tidak ditemukan`)
+  }
+
+  return element
+}
+getElement<HTMLDivElement>('#app').innerHTML = `
   <header class="app-header">
   <h1>TaskMate ♡</h1>
     <p>Kelola tugas kuliahmu dengan lebih mudah ♡</p>
@@ -81,11 +89,11 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   </footer>
 `
 
-const form = document.querySelector<HTMLFormElement>('#task-form')!
-const titleInput = document.querySelector<HTMLInputElement>('#task-title')!
-const courseInput = document.querySelector<HTMLInputElement>('#task-course')!
-const deadlineInput = document.querySelector<HTMLInputElement>('#task-deadline')!
-const taskList = document.querySelector<HTMLDivElement>('#task-list')!
+const form = getElement<HTMLFormElement>('#task-form')
+const titleInput = getElement<HTMLInputElement>('#task-title')
+const courseInput = getElement<HTMLInputElement>('#task-course')
+const deadlineInput = getElement<HTMLInputElement>('#task-deadline')
+const taskList = getElement<HTMLDivElement>('#task-list')
 
 function saveTasks(): void {
   localStorage.setItem('taskmate-tasks', JSON.stringify(tasks))
