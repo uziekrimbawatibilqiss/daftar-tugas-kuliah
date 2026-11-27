@@ -1,4 +1,6 @@
 import './style.css'
+const appName = import.meta.env.VITE_APP_NAME
+const appVersion = import.meta.env.VITE_APP_VERSION
 
 interface Task {
   id: number
@@ -7,6 +9,7 @@ interface Task {
   deadline: string
   completed: boolean
 }
+type TaskStatus = 'Belum Selesai' | 'Selesai'
 
 const initialTasks: Task[] = [
   {
@@ -40,10 +43,18 @@ function loadTasks(): Task[] {
 }
 
 let tasks: Task[] = loadTasks()
+function getElement<T extends HTMLElement>(selector: string): T {
+  const element = document.querySelector<T>(selector)
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+  if (!element) {
+    throw new Error(`Element ${selector} tidak ditemukan`)
+  }
+
+  return element
+}
+getElement<HTMLDivElement>('#app').innerHTML = `
   <header class="app-header">
-    <h1>Daftar Tugas Kuliah</h1>
+  <h1>Daftar Tugas Kuliah</h1>
     <p>Kelola tugas kuliahmu dengan lebih mudah ♡</p>
   </header>
 
@@ -54,8 +65,8 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
   <main class="main-container">
     <section class="welcome-section" id="beranda">
-     <h2>Halo, Uziek! ♡</h2>
-     <p>Selamat datang di Daftar Tugas Kuliah. Yuk, atur tugas kuliahmu agar lebih terorganisir.</p>
+      <h2>Halo, Uziek! ♡</h2>
+      <p>Selamat datang di Daftar Tugas Kuliah. Yuk, atur tugas kuliahmu agar lebih terorganisir.</p>
     </section>
 
     <section class="task-section" id="tugas">
@@ -76,15 +87,15 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   </main>
 
   <footer class="app-footer">
-    <p>Daftar Tugas Kuliah © 2026 | Stay organized, stay productive ♡</p>
-  </footer>
+  <p>${appName} © 2026 | Version ${appVersion} | Stay organized, stay productive ♡</p>
+</footer>
 `
 
-const form = document.querySelector<HTMLFormElement>('#task-form')!
-const titleInput = document.querySelector<HTMLInputElement>('#task-title')!
-const courseInput = document.querySelector<HTMLInputElement>('#task-course')!
-const deadlineInput = document.querySelector<HTMLInputElement>('#task-deadline')!
-const taskList = document.querySelector<HTMLDivElement>('#task-list')!
+const form = getElement<HTMLFormElement>('#task-form')
+const titleInput = getElement<HTMLInputElement>('#task-title')
+const courseInput = getElement<HTMLInputElement>('#task-course')
+const deadlineInput = getElement<HTMLInputElement>('#task-deadline')
+const taskList = getElement<HTMLDivElement>('#task-list')
 
 function saveTasks(): void {
   localStorage.setItem('taskmate-tasks', JSON.stringify(tasks))
@@ -104,6 +115,10 @@ function escapeHTML(text: string): string {
   })
 }
 
+function getTaskStatus(completed: boolean): TaskStatus {
+  return completed ? 'Selesai' : 'Belum Selesai'
+}
+
 function renderTasks(): void {
   if (tasks.length === 0) {
     taskList.innerHTML = '<p class="empty-message">Belum ada tugas. Yuk, tambahkan tugas pertamamu!</p>'
@@ -116,7 +131,7 @@ function renderTasks(): void {
         <h3>${escapeHTML(task.title)}</h3>
         <p>${escapeHTML(task.course)}</p>
         <p>Deadline: ${escapeHTML(task.deadline)}</p>
-        <p>Status: ${task.completed ? 'Selesai' : 'Belum Selesai'}</p>
+        <p>Status: ${getTaskStatus(task.completed)}</p>
       </div>
 
       <div class="task-actions">
